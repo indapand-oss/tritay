@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сводка новостей — 5 августа 2026</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --ink:#1a1d21; --ink2:#5c6570; --ink3:#8a939e;
+    --border:#e3e7ec; --shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);
+    --accent-usa:#6d5bd0; --accent-econ:#2f6fed; --accent-war:#c0392b; --accent-bim:#0e8a6d;
+    --accent-tech:#7c4dcc; --accent-ai:#d97706; --accent-games:#0e7ea3;
+  }
+  [data-theme="dark"]{
+    --bg:#14171c; --surface:#1e2329; --ink:#e8eaed; --ink2:#a8b0ba; --ink3:#727c88;
+    --border:#2c333c; --shadow:0 1px 3px rgba(0,0,0,.4);
+    --accent-usa:#9d8ff2; --accent-econ:#6b9bff; --accent-war:#ef7b6d; --accent-bim:#3fbf9c;
+    --accent-tech:#ab87f0; --accent-ai:#f0a343; --accent-games:#4db3d8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;padding:24px 16px 48px}
+  .wrap{max-width:1280px;margin:0 auto}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:6px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .stamp{color:var(--ink2);font-size:14px}
+  .sub{color:var(--ink3);font-size:13px;margin-bottom:20px}
+  .theme-btn{margin-left:auto;background:var(--surface);border:1px solid var(--border);
+    color:var(--ink2);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+  .theme-btn:hover{color:var(--ink)}
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+  .nav a{text-decoration:none;font-size:13px;font-weight:600;padding:6px 12px;
+    border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--ink2)}
+  .nav a:hover{color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(370px,1fr));gap:20px}
+  section{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    box-shadow:var(--shadow);overflow:hidden}
+  .sec-head{display:flex;align-items:center;gap:10px;padding:14px 18px;
+    border-bottom:1px solid var(--border)}
+  .dot{width:10px;height:10px;border-radius:3px;flex:none}
+  .sec-head h2{font-size:15px;font-weight:700}
+  .count{margin-left:auto;font-size:12px;color:var(--ink3)}
+  article{padding:13px 18px;border-bottom:1px solid var(--border)}
+  article:last-child{border-bottom:none}
+  article h3{font-size:14px;font-weight:600;line-height:1.35;margin-bottom:4px}
+  article h3 a{color:var(--ink);text-decoration:none}
+  article h3 a:hover{text-decoration:underline}
+  article p{font-size:13px;color:var(--ink2);margin-bottom:6px}
+  .meta{font-size:12px;color:var(--ink3)}
+  .meta b{font-weight:600;color:var(--ink3)}
+  .markets{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;margin-bottom:20px}
+  .mk-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    box-shadow:var(--shadow);padding:12px 14px 8px}
+  .mk-name{font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:2px}
+  .mk-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+  .mk-val{font-size:19px;font-weight:700;letter-spacing:-.02em}
+  .mk-unit{font-size:12px;color:var(--ink3)}
+  .mk-chg{font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:999px;margin-left:auto}
+  .mk-chg.up{color:#0a7d4f;background:rgba(16,160,100,.12)}
+  .mk-chg.down{color:#c0392b;background:rgba(220,80,60,.12)}
+  [data-theme="dark"] .mk-chg.up{color:#4ad395}
+  [data-theme="dark"] .mk-chg.down{color:#f08a7a}
+  .mk-chart{display:block;width:100%;height:56px}
+  .mk-foot{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink3);padding:2px 0 4px}
+  .summary{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+    box-shadow:var(--shadow);padding:16px 20px 18px;margin-bottom:20px}
+  .summary h2{font-size:15px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .summary p{font-size:13.5px;color:var(--ink2);margin-bottom:8px}
+  .summary .personal{border-left:3px solid var(--accent-econ);padding:8px 12px;border-radius:0 8px 8px 0;
+    background:color-mix(in srgb, var(--accent-econ) 6%, transparent);font-size:13.5px;color:var(--ink)}
+  .summary .personal b{display:block;margin-bottom:4px;font-size:12.5px;color:var(--accent-econ)}
+  .analytics{padding:14px 18px 16px;border-top:2px solid var(--border)}
+  .an-title{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .an-text{font-size:13px;color:var(--ink2);margin-bottom:8px}
+  .an-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .an-list li{font-size:12.5px;color:var(--ink2);padding-left:14px;position:relative}
+  .an-list li::before{content:"→";position:absolute;left:0;color:var(--ink3)}
+  .an-list a{color:var(--ink3);text-decoration:none;font-size:11.5px;white-space:nowrap}
+  .an-list a:hover{text-decoration:underline}
+  footer{margin-top:28px;text-align:center;font-size:12px;color:var(--ink3)}
+  @media (max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📰 Сводка новостей</h1>
+    <span class="stamp">5 августа 2026 · 18:00 МСК · вечерний выпуск</span>
+    <button class="theme-btn" onclick="toggleTheme()">◐ Тема</button>
+  </header>
+  <div class="sub">Автоматическая сводка по 7 темам с аналитикой и прогнозами · собрано Claude</div>
+
+  <nav class="nav">
+    <a href="#usa">🇺🇸 Новости США</a>
+    <a href="#econ">💰 Экономика РФ</a>
+    <a href="#war">⚔️ Война РФ–Украина</a>
+    <a href="#bim">🏗️ Проектирование и BIM</a>
+    <a href="#tech">💻 Технологии</a>
+    <a href="#ai">🤖 ИИ</a>
+    <a href="#games">🎮 Игры</a>
+  </nav>
+
+  <div class="markets" id="markets"></div>
+
+  <div class="summary" id="summary">
+    <h2>🧭 Сводная аналитика выпуска</h2>
+    <p>Мир входит в осень 2026 на противоречивом фоне. Геополитика внезапно смягчается на иранском направлении (сделка по Ормузскому проливу обрушила нефть с $105 к $80 за две недели), но на украинском — застыла: фронт статичен, Киев предлагает варианты перемирия до зимы, Москва не отвечает, и аналитики закладывают заморозку конфликта, а не мир. Для российской экономики это двоякий сигнал: дешевеющая нефть и крепкий рубль усиливают недобор бюджета (~700 млрд руб.), но ЦБ продолжает осторожно снижать ставку (14% → ~13,5% к декабрю), что постепенно оживит кредитование и стройку.</p>
+    <p>В технологиях главное противоречие года — ИИ-бум против дефицита железа: капзатраты на ИИ-инфраструктуру бьют рекорды ($805 млрд), при этом память дорожает на десятки процентов, ПК и смартфоны — на 13–17%, а новых игровых видеокарт в 2026 не будет вовсе. В российском проектировании тренд однозначный: ТИМ становится нормой (49% застройщиков, цель 60–65%), нормативка ужесточается, а Москва форсирует ИИ-сервисы в экспертизе и нормоконтроле.</p>
+    <div class="personal">
+      <b>Что это значит для вас (проектирование, умные дома, слаботочка)</b>
+      Снижение ставки к 13,5% постепенно удешевит проектное финансирование и ипотеку — к зиме-весне вероятно оживление частных заказов на инженерку и умные дома. Закладывайте в сметы рост цен на оборудование: память, контроллеры и электроника дорожают из-за глобального дефицита чипов, а ослабление рубля к 83 ₽/$ добавит импортным позициям ещё 3–5% — выгодно фиксировать закупки сейчас. По ТИМ: требования экспертизы унифицируются (КСИ, XML-схемы, автопроверка моделей) — стоит держать рабочие процессы в Renga/nanoCAD в актуальном состоянии, это становится конкурентным преимуществом при работе с застройщиками. ИИ-агенты в проектных задачах — главный тренд года: автоматизация спецификаций, проверок и однолинейных схем уже реальна, ранние внедрившие выиграют.
+    </div>
+  </div>
+
+  <div class="grid">
+
+  <section id="usa">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-usa)"></span><h2>Общие новости США</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-kuwait-jordan-air-base/" target="_blank">США и Иран движутся к сделке по Ормузскому проливу — Трамп отменил удары</a></h3><p>Рамочное соглашение предусматривает открытие Ормузского пролива, денуклеаризацию Ирана и снятие морской блокады США; переговоры идут через Оман, Вашингтон сигнализирует об оптимизме.</p><div class="meta"><b>CBS News / CNN</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.fool.com/coverage/stock-market-today/2026/08/04/stock-market-today-aug-4-s-and-p-500-and-dow-set-new-highs-on-easing-geopolitical-tensions/" target="_blank">Уолл-стрит на исторических максимумах: S&amp;P 500 — 7 736, Dow пробил 54 000</a></h3><p>Индексы выросли на деэскалации вокруг Ирана и сильных отчётах (Palantir +29%); нефть WTI рухнула более чем на 6% до $75,3, ослабляя инфляционное давление.</p><div class="meta"><b>Motley Fool / CNBC</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.aljazeera.com/economy/2026/7/29/us-fed-holds-interest-rates-steady-citing-elevated-inflation" target="_blank">ФРС удержала ставку 3,50–3,75% на фоне «повышенной» инфляции</a></h3><p>Комитет под руководством Кевина Уорша сохранил ставку; трое из двенадцати голосовали за повышение. Инфляция CPI замедлилась до 3,5%, но остаётся выше цели 2%.</p><div class="meta"><b>Al Jazeera</b> · 29.07.2026</div></article>
+    <article><h3><a href="https://www.washingtonpost.com/politics/2026/08/04/todd-blanche-attorney-general-senate-confirmation/282ee29e-8ff0-11f1-9fdc-0a725c989a7b_story.html" target="_blank">Сенат продвинул кандидатуру Тодда Бланша на пост генпрокурора</a></h3><p>Юридический комитет одобрил номинацию экс-адвоката Трампа после его согласия закрыть спорный фонд выплат; далее — голосование полного состава Сената.</p><div class="meta"><b>Washington Post / NBC</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.bls.gov/news.release/archives/jolts_08042026.htm" target="_blank">Рынок труда стабилизируется: 7,4 млн вакансий в июне</a></h3><p>Отчёт JOLTS показал стабильные наймы и увольнения — рынок труда охлаждается без волны массовых сокращений.</p><div class="meta"><b>BLS / Bloomberg</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.bloomberg.com/news/articles/2026-08-01/us-job-growth-to-pick-up-after-disappointing-june" target="_blank">В пятницу — отчёт по занятости: консенсус ждёт +85 тыс. мест</a></h3><p>Июльские данные станут ключевыми для решения ФРС по ставке в сентябре.</p><div class="meta"><b>Bloomberg</b> · 01.08.2026</div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-usa) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-usa)">📊 Аналитика и прогноз</div>
+      <p class="an-text">Главный сюжет — резкая деэскалация вокруг Ирана: наметившаяся сделка по Ормузскому проливу обрушила нефть к $75 и вывела индексы на максимумы. ФРС в необычной позиции: при инфляции 3,5% рынки делят вероятность почти поровну между паузой и повышением ставки в сентябре — снижение не рассматривается. Внимание смещается к ноябрьским промежуточным выборам, где модели дают демократам высокие шансы забрать Палату представителей.</p>
+      <ul class="an-list">
+        <li>Рынки предсказаний на сентябрь: 49,5% — пауза ФРС, 48,4% — повышение на 25 б.п., снижение ~1,5% <a href="https://defirate.com/prediction-markets/fed-decision-odds/" target="_blank">Kalshi/Polymarket</a></li>
+        <li>Модель 51/49: демократы берут Палату с вероятностью 85% (медиана 230 мест), Сенат — 55% <a href="https://blog.fiftyplusone.news/p/election-forecast-democrats-strongly-favored-house-tilt-senate" target="_blank">fiftyplusone</a></li>
+        <li>RSM US: рост ВВП 2,2% в 2026, инфляция CPI ~3%, безработица до 4,5%; вероятность рецессии — 30% <a href="https://rsmus.com/insights/economics/economic-outlook-for-2026.html" target="_blank">RSM</a></li>
+        <li>Goldman Sachs: базово два снижения ставки в 2026 до 3,00–3,25%, но фактическая траектория пока жёстче <a href="https://www.goldmansachs.com/insights/articles/the-outlook-for-fed-rate-cuts-in-2026" target="_blank">Goldman Sachs</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="econ">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-econ)"></span><h2>Экономика РФ</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://www.chita.ru/text/economics/2026/08/04/76567315/" target="_blank">ЦБ снизил ключевую ставку до 14% — прогнозы по ценам и кредитам</a></h3><p>Банк России снизил ключевую ставку на 25 б.п. до 14,00% годовых; экономисты ожидают дальнейшего постепенного смягчения политики до конца 2026 года при замедляющейся инфляции.</p><div class="meta"><b>ЧИТА.ру / Банк России</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://lenta.ru/news/2026/08/05/pripalo/" target="_blank">Нефтегазовые доходы бюджета сократились</a></h3><p>Минфин отчитался о снижении нефтегазовых доходов федерального бюджета по итогам июля — давление на бюджет 2026 года усиливается.</p><div class="meta"><b>Lenta.ru</b> · 05.08.2026</div></article>
+    <article><h3><a href="https://www.akm.ru/news/tsb_rf_ustanovil_ofitsialnyy_kurs_dollara_ssha_na_5_avgusta_v_81_1291_rub_/" target="_blank">Официальный курс доллара поднялся выше 81 рубля</a></h3><p>ЦБ установил курс доллара на 5 августа на уровне 81,13 руб.; евро и юань также подорожали к рублю.</p><div class="meta"><b>AKM.RU</b> · 05.08.2026</div></article>
+    <article><h3><a href="https://www.bfm.ru/news/614149" target="_blank">Рубль ждёт новых параметров бюджетного правила</a></h3><p>На фоне снижения нефтегазовых доходов обсуждаются изменения бюджетного правила, что может повлиять на валютные операции Минфина и курс рубля.</p><div class="meta"><b>BFM.ru</b></div></article>
+    <article><h3><a href="https://eadaily.com/ru/news/2026/08/04/nefti-rossii-gotovyat-krupneyshuyu-operaciyu-v-obhod-es-tankery-sobirayut-na-sevmorputi" target="_blank">Крупнейшая операция по экспорту нефти через Севморпуть</a></h3><p>Для экспорта российской нефти в обход ограничений ЕС на Северном морском пути собирают танкеры — готовится масштабное перенаправление поставок.</p><div class="meta"><b>EADaily</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://vfokuse.mail.ru/articles/69633685-geosvodka-sankcii-protiv-rossii-reshili-povesit-na-indiyu-novye-sankcii-ssha/" target="_blank">Новые санкции США увязывают с покупателями российской нефти</a></h3><p>США продвигают ограничения с пошлинами до 100% для стран-покупателей российской нефти, прежде всего Индии; эксперты оценивают последствия для экспорта.</p><div class="meta"><b>Mail.ru</b></div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-econ) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-econ)">📊 Аналитика и прогноз</div>
+      <p class="an-text">Экономика в фазе осторожного смягчения ДКП: ставка снижена до 14% при инфляции ~5,2% (выше цели 4%), рост ВВП замедлился до ~1%. Главное давление на бюджет — крепкий рубль: средний курс первого полугодия 76,5 руб/$ против заложенных в бюджет 92,2, нефтегазовые доходы за полугодие упали на 22,7%. Осенью вероятно умеренное сезонное ослабление рубля, что частично поддержит бюджет.</p>
+      <ul class="an-list">
+        <li>ВТБ: до конца года — два снижения ставки по 0,25 п.п., к декабрю 13,5% <a href="https://lenta.ru/news/2026/07/24/dan-prognoz-po-snizheniyu-klyuchevoy-stavki-banka-rossii-do-kontsa-goda/" target="_blank">Lenta.ru</a></li>
+        <li>Задорнов: доллар к концу года не дороже 83 руб., сезонное ослабление рубля — в пределах 10% <a href="https://finance.mail.ru/article/dollar-ne-budet-vyishe-83-rublej-k-kontsu-goda-69216431/" target="_blank">Mail.ru</a></li>
+        <li>Минэк повысил прогноз инфляции-2026 до 5,2%; ЦБ ждёт ВВП +0,5–1,5% в 2026 и +1,5–2,5% в 2027, МВФ — +1,1% <a href="https://www.interfax.ru/business/1089010" target="_blank">Интерфакс</a></li>
+        <li>Экономисты: недобор нефтегазовых доходов бюджета ~700 млрд руб. (8,2 вместо 8,9 трлн) <a href="https://meo.ru/news/byudzhet-rf-nedoschitaetsya-700-mlrd-rubley-2026-07-28" target="_blank">Известия/MEO</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="war">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-war)"></span><h2>Война РФ–Украина</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://zambianobserver.com/zelenskyy-proposes-air-ceasefire-energy-truce-and-front-line-freeze-ready-to-meet-putin/" target="_blank">Зеленский предложил варианты перемирия и готов встретиться с Путиным</a></h3><p>Предложены перемирие в воздухе, энергетическое перемирие и заморозка боевых действий по текущей линии фронта; по данным СМИ, Киев добивается перемирия до зимы.</p><div class="meta"><b>Zambian Observer / Толк</b> · 3–4.08.2026</div></article>
+    <article><h3><a href="https://eadaily.com/ru/news/2026/08/04/mihail-galuzin-nazval-uslovie-dlya-nachala-peregovorov-po-ukraine" target="_blank">МИД РФ назвал условие для начала переговоров</a></h3><p>Замглавы МИД Михаил Галузин обозначил условие для начала переговоров по урегулированию; Москва заявляет о готовности при «зрелом подходе» Запада.</p><div class="meta"><b>EADaily / Москва 24</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.aljazeera.com/news/2026/8/4/nine-killed-in-escalating-long-range-strikes-between-russia-and-ukraine" target="_blank">Девять погибших при эскалации взаимных дальнобойных ударов</a></h3><p>По данным Al Jazeera, не менее девяти человек погибли на фоне эскалации обменов дальнобойными ударами; обе стороны продолжают атаки по тыловым объектам.</p><div class="meta"><b>Al Jazeera</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.m24.ru/news/04082026/926925" target="_blank">ВС РФ нарастили удары по логистическим узлам Украины</a></h3><p>По сообщениям СМИ, удары по логистике усилены после публикации «40-дневного плана» Зеленского; 5 августа сообщалось о взрывах в Киеве.</p><div class="meta"><b>Москва 24 / EADaily</b> · 4–5.08.2026</div></article>
+    <article><h3><a href="https://www.yahoo.com/news/ukraine-war-latest-germany-threatens-192232275.html" target="_blank">Германия пригрозила ужесточением санкций перед переговорами</a></h3><p>Берлин заявил о возможном «значительном ужесточении» санкций против России в преддверии мирных переговоров; Запад обсуждает новые меры.</p><div class="meta"><b>Yahoo News</b></div></article>
+    <article><h3><a href="https://www.criticalthreats.org/analysis/russian-offensive-campaign-assessment-august-4-2026" target="_blank">ISW: сводка о ходе боевых действий на 4 августа</a></h3><p>Институт изучения войны фиксирует продолжение активных боевых действий на нескольких участках фронта; Германия раскрыла детали поставок вооружений Киеву.</p><div class="meta"><b>ISW / Critical Threats</b> · 04.08.2026</div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-war) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-war)">📊 Аналитика и прогноз</div>
+      <p class="an-text">Киев активизировал дипломатию (варианты перемирия, цель — соглашение до зимы), но позитивной реакции Москвы нет: Кремль настаивает на контроле над Донбассом. По оценке ISW, фронт в начале августа в целом статичен — Россия делает ставку не на прорывы, а на деградацию инфраструктуры ударами дронов и планирующих бомб. Аналитики считают заморозку конфликта более вероятной, чем полноценный мир.</p>
+      <ul class="an-list">
+        <li>WSJ: базовый сценарий — пятый год войны на истощение с переговорами по кругу <a href="https://newsukraine.rbc.ua/news/ukraine-war-in-2026-three-scenarios-analysts-1769682969.html" target="_blank">RBC-Ukraine</a></li>
+        <li>ORF/New Europe Centre: вероятнее хрупкое перемирие/замороженный конфликт, чем устойчивый мир; возможны новые санкции США перед выборами в Конгресс <a href="https://www.orfonline.org/expert-speak/russia-ukraine-war-in-2026-at-the-crossroads-of-peace-and-war" target="_blank">ORF</a></li>
+        <li>ЕС закладывает продолжение поддержки Украины: 90 млрд евро на 2026–2027 и «коалиция желающих» с потенциальными гарантиями безопасности <a href="https://www.orfonline.org/expert-speak/russia-ukraine-war-in-2026-at-the-crossroads-of-peace-and-war" target="_blank">ORF</a></li>
+        <li>Офис президента Украины: Путин не демонстрирует готовности к компромиссам по предложенным вариантам перемирия <a href="https://ru.themoscowtimes.com/2026/08/03/44-7-a202516" target="_blank">Moscow Times</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="bim">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-bim)"></span><h2>Проектирование и BIM · РФ и Москва</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://rengabim.com/news-bim-renga/" target="_blank">Renga представила дорожную карту развития на 2–3 года</a></h3><p>Опубликовано масштабное обновление дорожной карты BIM-системы с наиболее ожидаемыми проектировщиками решениями; подведены итоги конкурса «ТИМ-ЛИДЕРЫ 2025/26».</p><div class="meta"><b>Renga Software</b> · конец июля 2026</div></article>
+    <article><h3><a href="https://niisf.org/biblio/glavnaya/dlya-tim-v-rossii-sformirovana-edinaya-metodologicheskaya-osnova" target="_blank">Вступил в силу ГОСТ Р 10.00.00.02-2026 — единая методология ИМ</a></h3><p>Национальный стандарт «Единая система информационного моделирования. Принципы, цели и задачи» (Минстрой и ДОМ.РФ) закрепляет переход отрасли к модельно- и датаориентированному подходу.</p><div class="meta"><b>НИИСФ РААСН</b> · с 01.06.2026</div></article>
+    <article><h3><a href="https://www.c-o-k.ru/market_news/lidery-zadayut-standarty-ao-sisoft-development-predstavilo-edinyy-standart-primeneniya-tehnologiy-informacionnogo-modelirovaniya" target="_blank">«СиСофт» выпустила единый стандарт применения ТИМ</a></h3><p>Документ на 300+ страниц объединяет инженерные практики, нормативные требования и инструкции по организации ТИМ-процессов на отечественных платформах.</p><div class="meta"><b>Журнал СОК</b> · 21.07.2026</div></article>
+    <article><h3><a href="https://www.novostiitkanala.ru/news/detail.php?ID=197078" target="_blank">Доля застройщиков с ТИМ достигла 49%</a></h3><p>По итогам II квартала 2026 года ТИМ применяют 49% застройщиков (+2 п.п. за квартал), в 84 из 89 регионов, охватывая ~46% строящегося жилья.</p><div class="meta"><b>Новости IT-канала</b> · 13.07.2026</div></article>
+    <article><h3><a href="https://www.cnews.ru/news/line/2026-07-20_nanosoft_predstavlyaet" target="_blank">Вышел nanoCAD «Облака точек» 26 на Платформе nanoCAD 26</a></h3><p>Новая версия модуля для работы с облаками точек лазерного сканирования: новые инструменты обработки данных и повышенная стабильность.</p><div class="meta"><b>CNews</b> · 20.07.2026</div></article>
+    <article><h3><a href="https://www.m24.ru/news/08062026/908456" target="_blank">Экспертиза снизила стоимость проектов в Москве на 16%</a></h3><p>За январь–май 2026 года экспертиза проектной документации сократила заявленную стоимость строительства московских объектов на 64 млрд руб. за счёт оптимизации решений.</p><div class="meta"><b>Москва 24</b> · июнь 2026</div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-bim) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-bim)">📊 Аналитика и прогноз</div>
+      <p class="an-text">Цифровизация проектирования прошла точку невозврата: 49% застройщиков применяют ТИМ (против ~20% в начале 2024), обязательность действует для проектирования (с 07.2024) и СМР по 214-ФЗ. Драйверы — регуляторика (ПП №331, №614, новый ГОСТ) и импортозамещение: рынок делят Renga, nanoCAD, Model Studio CS. Ключевые тренды — параметрическое нормирование с автопроверкой моделей, единые XML-схемы и КСИ, внедрение ИИ в экспертизу; Москва тиражирует свои цифровые сервисы в регионы.</p>
+      <ul class="an-list">
+        <li>Рексофт Консалтинг: доля застройщиков с ТИМ вырастет до 60–65% в ближайшие пару лет <a href="https://www.comnews.ru/content/246405/2026-07-15/2026-w29/1008/dolya-zastroyschikov-ispolzuyuschikh-tim-dostigla-49" target="_blank">ComNews</a></li>
+        <li>Strategy Partners: рынок инженерного ПО РФ — +16% в год, до 74 млрд руб. к 2030; сегмент ТИМ — до 20,2 млрд (+32%/год), российские вендоры займут 93% <a href="https://www.cnews.ru/news/line/2024-10-22_rynok_inzhenernogo_po_v_rossii" target="_blank">CNews</a></li>
+        <li>Тренды-2026: параметрическое нормирование, автопроверка моделей на нормы, унификация экспертизы через КСИ и XML-схемы <a href="https://spbplan.ru/news/125010" target="_blank">SPbPlan</a></li>
+        <li>Москва: план 12+ млн кв. м в 2026; ИИ-сервисы («Цифровой нормоконтроль» −50% времени проверки) тиражируются в 21 регион, далее — цифровые двойники территорий <a href="https://www.comnews.ru/content/246128/2026-07-01/2026-w27/1011/moskva-tirazhiruet-edinye-cifrovye-standarty-stroitelstva-vsey-strane" target="_blank">ComNews</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tech">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-tech)"></span><h2>Компьютерные технологии</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://techstartups.com/2026/08/04/top-tech-news-today-august-4-2026-anthropic-apple-google-meta-openai-palantir-more/" target="_blank">Apple вернула звание самой дорогой компании США, обойдя Nvidia</a></h3><p>Инвесторы переоценивают гигантские траты конкурентов на ИИ-инфраструктуру; сдержанный подход Apple к дата-центрам контрастирует с многосотмиллиардными обязательствами соперников.</p><div class="meta"><b>TechStartups</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://www.secondtalent.com/news/tech/" target="_blank">AMD: выручка дата-центров удвоилась до $6,7 млрд</a></h3><p>Серверный сегмент AMD более чем удвоился год к году во II квартале 2026 на фоне спроса на ИИ-мощности.</p><div class="meta"><b>Second Talent</b> · 05.08.2026</div></article>
+    <article><h3><a href="https://www.secondtalent.com/news/tech/" target="_blank">Qualcomm повышает цены на процессоры с 1 сентября</a></h3><p>Причины — экономические условия и дефицит памяти; вероятно удорожание будущих Android-флагманов.</p><div class="meta"><b>Second Talent</b> · 05.08.2026</div></article>
+    <article><h3><a href="https://finance.biggo.com/news/b7975cb6-0f80-48ee-a3ea-469124186048" target="_blank">Pixel 11 с Tensor 6 — первый смартфон на 2-нм техпроцессе TSMC</a></h3><p>Презентация 12 августа; 2-нм чип должен решить проблемы нагрева прошлых Tensor, но серия подорожает примерно на $100.</p><div class="meta"><b>BigGo</b> · август 2026</div></article>
+    <article><h3><a href="https://techstartups.com/2026/08/04/top-tech-news-today-august-4-2026-anthropic-apple-google-meta-openai-palantir-more/" target="_blank">Цены на видеокарты аномально высоки: RTX 5090 дороже $4000</a></h3><p>Топовые GPU продаются с большими наценками из-за дорогой памяти и конкуренции потребительского рынка с ИИ-спросом дата-центров.</p><div class="meta"><b>TechStartups</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://techstartups.com/2026/08/04/top-tech-news-today-august-4-2026-anthropic-apple-google-meta-openai-palantir-more/" target="_blank">США готовят запрет на китайское оборудование для дата-центров</a></h3><p>Ограничения на импорт китайских компонентов — сетевое оборудование, охлаждение, питание — со ссылкой на киберугрозы.</p><div class="meta"><b>TechStartups</b> · 04.08.2026</div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-tech) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-tech)">📊 Аналитика и прогноз</div>
+      <p class="an-text">Главный фактор рынка — дефицит памяти: VRAM уже более 80% себестоимости топовых видеокарт, нормализация поставок ожидается не ранее 2027–2028. Впервые за ~30 лет в 2026 году не выйдет нового поколения игровых GPU. Устройства дорожают, поставки ПК и смартфонов падают, при этом TSMC наращивает 2-нм мощности под ИИ-спрос.</p>
+      <ul class="an-list">
+        <li>TrendForce: DRAM подорожает ещё на 13–18%, NAND на 10–15% в III кв.; дефицит — весь 2026 год <a href="https://www.trendforce.com/presscenter/news/20260703-13134.html" target="_blank">TrendForce</a></li>
+        <li>Gartner: поставки ПК в 2026 упадут на 10,4%, смартфонов на 8,4%; ПК подорожают на 17%, смартфоны на 13%; сегмент ПК дешевле $500 исчезнет к 2028 <a href="https://www.gartner.com/en/newsroom/press-releases/2026-02-26-gartner-says-surging-memory-costs-will-reduce-global-pc-and-smartphone-shipments-in-2026" target="_blank">Gartner</a></li>
+        <li>Новые GPU: RTX 50 Super — не ранее CES 2027, AMD RDNA 5 — вторая половина 2027 <a href="https://www.techtimes.com/articles/320169/20260711/gpu-memory-crisis-prices-rtx-5090-above-4300-nvidia-offers-paper-cards.htm" target="_blank">TechTimes</a></li>
+        <li>TSMC: полупроводниковый рынок — $1,5 трлн к 2030 (55% спроса — AI/HPC); осенью — Pixel 11 (12.08), iPhone 18 Pro и складной iPhone Fold (сентябрь), Mac на M6 (октябрь) <a href="https://appleinsider.com/articles/26/08/03/iphones-and-home-hardware-what-to-expect-from-apple-for-the-rest-of-2026" target="_blank">AppleInsider</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ai">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-ai)"></span><h2>ИИ-технологии и тренды</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://radicaldatascience.wordpress.com/2026/08/04/ai-news-briefs-bulletin-board-for-august-2026/" target="_blank">Невыпущенная модель OpenAI решила десять давних математических проблем</a></h3><p>Внутренняя модель разрешила открытые задачи от высокоразмерной геометрии и теории кодирования до квантовой сложности и решётчатой криптографии.</p><div class="meta"><b>Radical Data Science</b> · 03.08.2026</div></article>
+    <article><h3><a href="https://radicaldatascience.wordpress.com/2026/08/04/ai-news-briefs-bulletin-board-for-august-2026/" target="_blank">Alibaba анонсировала Qwen3.8-Max на 2,4 трлн параметров</a></h3><p>Флагман улучшен в коде и агентных задачах (открытые веса — на следующей неделе); также вышла открытая Qwen3.8-27B, умещающаяся в 17 ГБ памяти.</p><div class="meta"><b>Radical Data Science</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://fortune.com/2026/08/04/baffling-white-house-wont-publicly-release-ai-model-evaluation-framework-it-reviewed-today-with-openai-anthropic-microsoft-and-others/" target="_blank">Белый дом не станет публиковать рамочную систему оценки ИИ-моделей</a></h3><p>Согласованная с OpenAI, Anthropic и Microsoft добровольная система проверки frontier-моделей (до 30 дней на госревью) останется закрытой — эксперты озадачены.</p><div class="meta"><b>Fortune</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://radicaldatascience.wordpress.com/2026/08/04/ai-news-briefs-bulletin-board-for-august-2026/" target="_blank">Китайская Kimi K3 на 2,8 трлн параметров — топ бенчмарков при экономной MoE-архитектуре</a></h3><p>Открытая модель Moonshot AI активирует лишь 16 из 896 экспертов на токен, сохраняя низкие вычислительные затраты.</p><div class="meta"><b>Radical Data Science</b> · 03.08.2026</div></article>
+    <article><h3><a href="https://llm-stats.com/ai-news" target="_blank">Британский институт безопасности ИИ зафиксировал 19 попыток взлома со стороны frontier-моделей</a></h3><p>В ходе июльских киберучений модели 19 раз пытались компрометировать людей и компании — сигнал регуляторам о рисках агентных возможностей.</p><div class="meta"><b>Axios / LLM Stats</b> · 04.08.2026</div></article>
+    <article><h3><a href="https://llm-stats.com/ai-news" target="_blank">Суд США разрешил Perplexity агентный шопинг на Amazon</a></h3><p>Апелляционный суд отменил временный запрет — важный прецедент для рынка ИИ-агентов в e-commerce.</p><div class="meta"><b>Reuters / LLM Stats</b> · 04.08.2026</div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-ai) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-ai)">📊 Аналитика и прогноз</div>
+      <p class="an-text">Индустрия ИИ — в фазе беспрецедентных капзатрат ($805 млрд гиперскейлеров в 2026), при этом усиливаются дискуссии об ИИ-пузыре: разрыв между расходами на дата-центры и реальной ИИ-выручкой растёт. Агентный ИИ массово встраивается в корпоративное ПО, но со значительной долей неудачных проектов. Регулирование ужесточается: с августа 2026 действуют обязательства EU AI Act для высокорисковых систем (штрафы до 7% оборота).</p>
+      <ul class="an-list">
+        <li>Morgan Stanley: capex гиперскейлеров $805 млрд в 2026, до $1,1 трлн в 2027 <a href="https://www.aichatdaily.com/ai-business/aichat-20260504-s2-morgan-stanley-raises-2026" target="_blank">AI Chat Daily</a></li>
+        <li>Man Group: первая волна дефолтов по облигациям дата-центров вероятна в 2027–2028 (кредиты на 10–20 лет при жизни GPU ~1 год) <a href="https://www.man.com/insights/the-ai-bubble" target="_blank">Man Group</a></li>
+        <li>Gartner: к концу 2026 ИИ-агенты — в 40% корпоративных приложений (было &lt;5% в 2025), но 40%+ агентных проектов будет отменено к концу 2027 <a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" target="_blank">Gartner</a></li>
+        <li>Bain: рынок ИИ — $780–990 млрд к 2027 (+40–55%/год); ожидаемые релизы: GPT-6 (слухи, 2026), Gemini 3.5 Pro, открытый Qwen3.8-Max <a href="https://www.emarketer.com/content/soaring-gpu-data-center-demand-could-inflate-costs-delay-benefits-of-ai-expansion" target="_blank">eMarketer</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="games">
+    <div class="sec-head"><span class="dot" style="background:var(--accent-games)"></span><h2>Компьютерные игры</h2><span class="count">6 новостей</span></div>
+    <article><h3><a href="https://www.eventhubs.com/news/2026/aug/01/spoilers-marvel-tokon-broken-date/" target="_blank">Релиз файтинга MARVEL Tōkon: Fighting Souls</a></h3><p>Файтинг 4-на-4 от Arc System Works и PlayStation выходит на PS5 и ПК; в некоторых регионах игра поступила в продажу раньше срока.</p><div class="meta"><b>EventHubs / Kotaku</b> · 1–4.08.2026</div></article>
+    <article><h3><a href="https://rg.ru/2026/08/03/rossijskie-razrabotchiki-pokazali-bolee-20-igr-na-vystavke-v-kitae.html" target="_blank">Российские студии показали более 20 игр на выставке в Китае</a></h3><p>Заметный шаг в продвижении российского игропрома на азиатский рынок.</p><div class="meta"><b>Российская газета</b> · 03.08.2026</div></article>
+    <article><h3><a href="https://www.championat.ru/cybersport/news-6570120-igry-v-game-pass-gejmpass-avgust-2026-beast-of-reincarnation-powerwash-simulator-2-ball-x-pit-i-drugie.html" target="_blank">Xbox Game Pass в августе: Beast of Reincarnation, PowerWash Simulator 2 и другие</a></h3><p>Microsoft раскрыла августовскую подборку каталога Game Pass.</p><div class="meta"><b>Чемпионат</b> · август 2026</div></article>
+    <article><h3><a href="https://www.cbr.com/steam-next-free-game-august-2026-official-reveal-moonlighter/" target="_blank">Steam раздаст бесплатно Moonlighter</a></h3><p>Очередной free-to-keep август в Steam: экшен-RPG Moonlighter; ранее анонсировали раздачу Deponia.</p><div class="meta"><b>CBR / GameRant</b> · август 2026</div></article>
+    <article><h3><a href="https://www.championat.com/cybersport/article-6423714-esports-world-cup-2026-raspisanie-turnira-po-dote-2-i-ks-2-prizovoj-fond-uchastniki-iz-rossii-i-gde-smotret-onlajn.html" target="_blank">Esports World Cup 2026: россияне в турнирах по Dota 2 и CS2</a></h3><p>Опубликованы расписание, призовой фонд и списки участников, включая российских игроков и команды.</p><div class="meta"><b>Чемпионат</b> · август 2026</div></article>
+    <article><h3><a href="https://www.pcgamer.com/games/pc-game-release-dates-august-2026/" target="_blank">Август — затишье перед осенней волной релизов</a></h3><p>PC Gamer подвёл календарь ПК-релизов: месяц спокойный, но это последняя пауза перед крупными премьерами конца года.</p><div class="meta"><b>PC Gamer</b> · август 2026</div></article>
+    <div class="analytics" style="background:color-mix(in srgb, var(--accent-games) 5%, transparent)">
+      <div class="an-title" style="color:var(--accent-games)">📊 Аналитика и прогноз</div>
+      <p class="an-text">После тихого августа индустрию ждёт беспрецедентно плотная осень: крупные релизы почти еженедельно, кульминация — GTA 6 (19 ноября). Рынок PC/консолей в новой фазе роста, российский рынок (~200 млрд руб.) растёт быстрее среднемирового. Главный технологический сдвиг — «тихое» массовое внедрение генеративного ИИ студиями AAA на фоне сопротивления игроков (52% разработчиков на GDC 2026 считают, что генИИ вредит индустрии).</p>
+      <ul class="an-list">
+        <li>Осень-2026: Marvel's Wolverine (15.09), Onimusha (25.09), Ace Combat 8 (02.10), CoD: Modern Warfare 4 (23.10), GTA 6 (19.11) <a href="https://gamerant.com/biggest-games-fall-2026-holiday-season/" target="_blank">Game Rant</a></li>
+        <li>Newzoo: ПК обгонит консоли по выручке к 2028; аудитория ПК — 1,02 млрд игроков к 2028 <a href="https://gamedevreports.substack.com/p/newzoo-pc-and-console-market-in-2026" target="_blank">Newzoo</a></li>
+        <li>Инсайдеры: PS6 и следующий Xbox (Magnus) нацелены на 2027 год <a href="https://www.techradar.com/gaming/insider-reports-claim-that-both-the-ps6-and-the-next-xbox-console-are-targeting-a-2027-release" target="_blank">TechRadar</a></li>
+        <li>Финам: рост российского рынка игр в 2026 — до +10%; ~7000 игр в Steam получат метку ИИ (~треть релизов) <a href="https://www.comnews.ru/content/243119/2026-01-12/2026-w03/1008/povorotnyy-god-2026-g-rynok-videoigr-zhdet-ii-bum" target="_blank">ComNews</a></li>
+      </ul>
+    </div>
+  </section>
+
+  </div>
+  <footer>Сводка собрана автоматически из открытых источников · 5 августа 2026, 18:00 МСК · следующий выпуск — 8:00 МСК</footer>
+</div>
+<script>
+  const MARKET_DATA = [
+    {"id":"usdrub","name":"Доллар / Рубль · ЦБ РФ","unit":"₽","current":81.13,"approx":false,"series":[["07.07",77.97],["08.07",76.13],["09.07",76.40],["10.07",75.93],["11.07",76.66],["14.07",76.62],["15.07",77.49],["16.07",77.96],["17.07",78.32],["18.07",78.40],["21.07",78.32],["22.07",78.55],["23.07",78.48],["24.07",78.40],["25.07",78.03],["28.07",78.02],["29.07",78.70],["30.07",79.36],["31.07",79.86],["01.08",79.46],["04.08",80.07],["05.08",81.13]]},
+    {"id":"btc","name":"Биткоин","unit":"$","current":64054,"approx":false,"series":[["06.07",63572],["07.07",64000],["08.07",63287],["09.07",62250],["10.07",63188],["11.07",64125],["12.07",63783],["13.07",63744],["14.07",62242],["15.07",64960],["16.07",64715],["17.07",63791],["18.07",63899],["19.07",64798],["20.07",64682],["21.07",65210],["22.07",66512],["23.07",66074],["24.07",65051],["25.07",64095],["26.07",64312],["27.07",65335],["28.07",63711],["29.07",63873],["30.07",63897],["31.07",64721],["01.08",62811],["02.08",62760],["03.08",63487],["04.08",63461],["05.08",64054]]},
+    {"id":"brent","name":"Нефть Brent","unit":"$/барр","current":79.93,"approx":false,"series":[["02.07",68.53],["03.07",68.68],["06.07",69.56],["07.07",71.78],["08.07",76.50],["09.07",74.46],["10.07",74.34],["13.07",81.62],["14.07",83.69],["15.07",83.08],["16.07",81.23],["17.07",85.01],["20.07",86.99],["21.07",93.85],["22.07",94.12],["23.07",105.32],["24.07",100.31],["27.07",91.82],["28.07",85.51],["29.07",91.95],["30.07",91.91],["31.07",96.95],["03.08",88.90],["05.08",79.93]]},
+    {"id":"gold","name":"Золото","unit":"$/унц","current":4148.5,"approx":true,"series":[["04.07",4177.8],["28.07",4027.4],["04.08",4077.4],["05.08",4148.5]]},
+    {"id":"gazp","name":"Газпром · GAZP","unit":"₽","current":95.03,"approx":true,"series":[["06.07",98.70],["24.07",93.22],["04.08",93.15],["05.08",95.03]]},
+    {"id":"sber","name":"Сбербанк · SBER","unit":"₽","current":286.98,"approx":true,"series":[["06.07",303.40],["23.07",263.61],["24.07",267.60],["31.07",276.52],["04.08",284.60],["05.08",286.98]]}
+  ];
+  function fmtVal(v){
+    return v >= 1000 ? Math.round(v).toLocaleString('ru-RU') : (Math.round(v*100)/100).toLocaleString('ru-RU');
+  }
+  function renderMarkets(){
+    const host = document.getElementById('markets');
+    host.innerHTML = '';
+    const W = 220, H = 56, P = 3;
+    MARKET_DATA.forEach(m => {
+      const vals = m.series.map(p => p[1]);
+      const min = Math.min(...vals), max = Math.max(...vals), span = (max - min) || 1;
+      const n = vals.length;
+      const x = i => P + i * (W - 2*P) / (n - 1);
+      const y = v => H - P - (v - min) * (H - 2*P) / span;
+      const pts = vals.map((v,i) => x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
+      const chg = (vals[n-1] - vals[0]) / vals[0] * 100;
+      const up = chg >= 0;
+      const col = up ? '#10a064' : '#e05a48';
+      const first = m.series[0][0], last = m.series[n-1][0];
+      const card = document.createElement('div');
+      card.className = 'mk-card';
+      card.innerHTML =
+        '<div class="mk-name">' + m.name + (m.approx ? ' <span title="Опорные точки, не полная история">≈</span>' : '') + '</div>' +
+        '<div class="mk-row"><span class="mk-val">' + fmtVal(m.current) + '</span><span class="mk-unit">' + m.unit + '</span>' +
+        '<span class="mk-chg ' + (up?'up':'down') + '">' + (up?'▲':'▼') + ' ' + Math.abs(chg).toFixed(1) + '%</span></div>' +
+        '<svg class="mk-chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="' + m.name + ', динамика за месяц">' +
+        '<polyline points="' + pts + ' ' + (W-P) + ',' + (H-P) + ' ' + P + ',' + (H-P) + '" fill="' + col + '" opacity="0.09" stroke="none"/>' +
+        '<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+        '<circle cx="' + x(n-1) + '" cy="' + y(vals[n-1]) + '" r="3" fill="' + col + '"><title>' + last + ': ' + fmtVal(vals[n-1]) + ' ' + m.unit + '</title></circle>' +
+        '</svg>' +
+        '<div class="mk-foot"><span>' + first + '</span><span>мин ' + fmtVal(min) + ' · макс ' + fmtVal(max) + '</span><span>' + last + '</span></div>';
+      host.appendChild(card);
+    });
+  }
+  renderMarkets();
+  const saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  let theme = saved;
+  document.documentElement.setAttribute('data-theme', theme);
+  function toggleTheme(){
+    theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+</script>
+</body>
+</html>
