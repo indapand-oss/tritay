@@ -69,14 +69,17 @@ label.item.done .it b{text-decoration:line-through;opacity:.55}
 .foot{text-align:center;color:var(--muted);font-size:13px;margin:14px 6px}
 .reset{display:block;margin:6px auto 0;border:0;background:none;color:var(--muted);text-decoration:underline;font:inherit;font-size:13px}
 .empty{padding:6px 16px 14px;color:var(--muted);font-size:14px}
+
+.note.info{border-left:4px solid var(--nose);color:var(--ink)}
+.stage{display:inline-block;font-size:12px;font-weight:700;border-radius:10px;padding:2px 8px;margin-left:6px;background:var(--chip);color:var(--muted)}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap" style="padding:0">
-    <h1>Дочка · лечение ОРВИ</h1>
-    <div class="sub">23.09 – 02.10.2026 · назначение педиатра от 23.09</div>
-    <div class="pill">Повторный приём: 28.09 в 12:00</div>
+    <h1>Дочка · план на месяц</h1>
+    <div class="sub">28.09 – 28.10.2026 · аллергический ринит, назначение педиатра от 28.09</div>
+    <div class="pill">Физкультура — освобождение до ~12.10</div>
   </div>
 </header>
 <main class="wrap">
@@ -85,116 +88,95 @@ label.item.done .it b{text-decoration:line-through;opacity:.55}
   <div id="dayNote"></div>
   <div id="blocks"></div>
 
-  <section class="block" style="--c:var(--drink)">
-    <div class="bh"><h2>Весь день</h2><span>пока болеет</span></div>
-    <div class="static">
-      <p><b>Тёплое питьё</b> — часто и понемногу: вода, морс, чай.</p>
-      <p><b>Боржоми без газа, тёплый</b> — 2–3 глотка каждый час.</p>
-    </div>
-  </section>
-
   <section class="after">
-    <h2>После лечения</h2>
-    <p>с <b>30.09</b> — цинковый сироп убрать</p>
-    <p>с <b>03.10</b> — витамин D снова <b>2 капли</b></p>
-    <p>Kid Vits и Омега-3 — как обычно</p>
+    <h2>Важно</h2>
+    <p><b>Зиртек не давать</b> — Ксизал его заменяет, вместе нельзя.</p>
+    <p><b>Сингуляр:</b> если появились кошмары, плохой сон, плаксивость, раздражительность — написать врачу, не ждать конца курса.</p>
+    <p><b>Аллергопробы</b> — при первых заморозках: кровь + кожные пробы. Перед кожными Ксизал отменяют заранее (срок скажет аллерголог).</p>
   </section>
 
   <section class="red">
     <h2>Сразу 103, не ждать</h2>
     <ul>
-      <li>тяжело или шумно дышит, втягиваются межрёберья</li>
-      <li>синеют губы, после кашля останавливается дыхание</li>
-      <li>лающий кашель с осиплым голосом</li>
+      <li>отёк губ, языка, век или лица</li>
+      <li>тяжело дышать, свистящее дыхание, втягиваются межрёберья</li>
+      <li>осиплый голос, трудно глотать</li>
+      <li>крапивница по всему телу вместе с вялостью или рвотой</li>
       <li>температура выше 38,5, которая не сбивается</li>
-      <li>сильная вялость, не пьёт</li>
     </ul>
   </section>
 
-  <p class="foot">Если кашель к 28.09 не пройдёт или станет приступами — спросить врача про мазок на коклюш.<br><br>
-  Время примерное — подстраивайте под день. Составлено по назначению педиатра, лечение назначает врач.
+  <p class="foot">Время примерное — подстраивайте под день. Составлено по назначению педиатра, лечение назначает врач.
   <button class="reset" id="reset">Сбросить отметки за этот день</button></p>
 </main>
 
 <script>
 (function(){
-  var START=new Date(2026,8,23), DAYS=10, VISIT=5;
+  var START=new Date(2026,8,28), DAYS=31;
   var WD=["вс","пн","вт","ср","чт","пт","сб"];
   function dt(i){var d=new Date(START);d.setDate(d.getDate()+i);return d;}
-  function lbl(d){return ("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2);}
-  // until = последний индекс дня (0 = 23.09)
-  var U={sinupret:2, nose5:4, throat:4, zyrtec:4, zinc:6, d3:9, euph:9, always:99};
-  var UL={2:"по 25.09",4:"по 27.09",6:"по 29.09",9:"по 02.10",99:""};
+  function key(i){var d=dt(i);return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+  // [id, title, sub, fromIdx, toIdx, untilLabel]
+  // 0=28.09, 1=29.09, 4=02.10, 5=03.10, 30=28.10
   var B=[
-   {t:"Утро · завтрак",s:"≈ 8:00, с едой",c:"--morning",items:[
-     ["d3","Витамин D3+K2 Trace — 3 капли","вместо обычных 2 капель",U.d3],
-     ["zinc","Цинковый сироп — 25 мл (5 ложек)","во время еды · это и цинк, и витамин C",U.zinc],
-     ["kv","Kid Vits","как обычно",U.always],
-     ["om","Омега-3 ДГК — 1 капсула","во время еды",U.always],
-     ["sn1","Синупрет — 25 капель","в ложке воды",U.sinupret]]},
-   {t:"Утро · нос и горло",s:"после завтрака",c:"--nose",items:[
-     ["n1a","Отривин — 1 впрыск","",U.nose5],
-     ["n1b","Через 10 мин — промыть солевым","потом высморкаться",U.nose5],
-     ["n1c","Эуфорбиум — 1 впрыск","после промывания",U.euph],
-     ["g1","Полоскание: сода + соль","⅓ ч. л. соды и соли на стакан тёплой воды",U.throat],
-     ["f1","Фарингосепт — 1 таблетка","рассосать после полоскания",U.throat]]},
-   {t:"День",s:"≈ 12:00",c:"--throat",items:[
-     ["g2","Полоскание: фурацилин","",U.throat]]},
-   {t:"Обед",s:"≈ 14:00",c:"--food",items:[
-     ["sn2","Синупрет — 25 капель","в ложке воды",U.sinupret],
-     ["n2a","Отривин — 1 впрыск <span class='opt'>(если нос заложен)</span>","",U.nose5],
-     ["n2b","Промыть нос солевым","через 10 мин, высморкаться",U.nose5],
-     ["n2c","Эуфорбиум — 1 впрыск","",U.euph],
-     ["g3","Полоскание: сода + соль","",U.throat],
-     ["f2","Фарингосепт — 1 таблетка","после полоскания",U.throat]]},
-   {t:"Ужин",s:"≈ 18:30",c:"--food",items:[
-     ["sn3","Синупрет — 25 капель","в ложке воды",U.sinupret],
-     ["g4","Полоскание: фурацилин","",U.throat],
-     ["f3","Фарингосепт — 1 таблетка","после полоскания",U.throat]]},
-   {t:"Вечер",s:"≈ 20:30, перед сном",c:"--evening",items:[
-     ["n3a","Отривин — 1 впрыск","",U.nose5],
-     ["n3b","Через 10 мин — промыть солевым","высморкаться",U.nose5],
-     ["n3c","Эуфорбиум — 1 впрыск","",U.euph],
-     ["zy","Зиртек — 15 капель","1 раз в день",U.zyrtec]]}
+   {t:"Утро · завтрак",s:"≈ 7:30, с едой",c:"--morning",items:[
+     ["xy","Ксизал — 15 капель","утром",0,30,"по 28.10"],
+     ["d3a","Витамин D3 Trace — 3 капли","курс после ОРВИ",0,4,"по 02.10"],
+     ["d3b","Витамин D3 Trace — 2 капли","обычная доза",5,30,""],
+     ["zn","Цинковый сироп — 25 мл (5 ложек)","во время еды · последний день",0,1,"по 29.09"],
+     ["kv","Kid Vits","как обычно",0,30,""],
+     ["om","Омега-3 ДГК — 1 капсула","во время еды",0,30,""]]},
+   {t:"Улица",s:"каждый выход",c:"--nose",items:[
+     ["am","Перед выходом — Аква Марис с эктоином","в каждую ноздрю",0,30,"по 28.10"],
+     ["rn","После улицы — промыть нос солевым","мягкий душ, потом высморкаться",0,30,"по 28.10"]]},
+   {t:"Вечер",s:"каждый день в одно время",c:"--evening",items:[
+     ["sg","Сингуляр (Монтелар) 5 мг — 1 таблетка","жевательная · время уточнить у врача, если не сказала",0,30,"по 28.10"]]}
   ];
-  var KEY="vasilisa_orvi_2026";
+  var KEY="dochka_allergy_2026";
   var store={}; try{store=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){store={};}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
-  function todayIdx(){var n=new Date();n.setHours(0,0,0,0);var i=Math.round((n-START)/864e5);return (i<0)?0:(i>=DAYS?DAYS-1:i);}
+  function todayIdx(){var n=new Date();n.setHours(0,0,0,0);var i=Math.round((n-START)/864e5);return i<0?0:(i>=DAYS?DAYS-1:i);}
   var sel=todayIdx();
-  function itemsFor(i){var r=[];B.forEach(function(b){b.items.forEach(function(it){if(i<=it[3])r.push(it[0]);});});return r;}
-  function doneCount(i){var ids=itemsFor(i),d=store[i]||{},c=0;ids.forEach(function(id){if(d[id])c++;});return [c,ids.length];}
+  function active(it,i){return i>=it[3]&&i<=it[4];}
+  function itemsFor(i){var r=[];B.forEach(function(b){b.items.forEach(function(it){if(active(it,i))r.push(it[0]);});});return r;}
+  function doneCount(i){var ids=itemsFor(i),d=store[key(i)]||{},c=0;ids.forEach(function(id){if(d[id])c++;});return [c,ids.length];}
   function renderDays(){
     var h="";for(var i=0;i<DAYS;i++){var d=dt(i),dc=doneCount(i);
-      h+='<button class="day'+(i===sel?' sel':'')+(i===VISIT?' visit':'')+'" data-i="'+i+'"><b>'+d.getDate()+'</b><small>'+WD[d.getDay()]+'</small><span class="dot'+(dc[1]&&dc[0]===dc[1]?' done':'')+'"></span></button>';}
+      h+='<button class="day'+(i===sel?' sel':'')+'" data-i="'+i+'"><b>'+d.getDate()+'</b><small>'+WD[d.getDay()]+'</small><span class="dot'+(dc[1]&&dc[0]===dc[1]?' done':'')+'"></span></button>';}
     var el=document.getElementById("days");el.innerHTML=h;
     Array.prototype.forEach.call(el.querySelectorAll(".day"),function(b){b.onclick=function(){sel=+b.dataset.i;render();};});
     var s=el.querySelector(".sel"); if(s&&s.scrollIntoView) s.scrollIntoView({inline:"center",block:"nearest"});
   }
+  function note(i){
+    if(i===1) return '<div class="note info"><b>Сегодня последний день цинкового сиропа.</b></div>';
+    if(i===4) return '<div class="note info"><b>Последний день витамина D по 3 капли.</b> С завтра — снова 2 капли.</div>';
+    if(i===5) return '<div class="note info">С сегодня витамин D — <b>2 капли</b>, как обычно.</div>';
+    if(i===14) return '<div class="note info">Примерно с сегодня заканчивается освобождение от физкультуры — уточнить по справке.</div>';
+    if(i===30) return '<div class="note visit"><b>Последний день курса Ксизала и Сингуляра.</b> Показаться педиатру: продолжать или отменять.</div>';
+    return "";
+  }
   function render(){
     renderDays();
-    var d=store[sel]||{}, html="";
-    var note=document.getElementById("dayNote");
-    note.innerHTML = sel===VISIT ? '<div class="note visit"><b>Сегодня в 12:00 — повторный приём.</b> Если кашель ещё есть — спросить про мазок на коклюш.</div>'
-      : (sel===9 ? '<div class="note">Последний день D3 по 3 капли и Эуфорбиума. С 03.10 — D снова 2 капли.</div>' : "");
+    var d=store[key(sel)]||{}, html="";
+    document.getElementById("dayNote").innerHTML=note(sel);
     B.forEach(function(b){
       var rows="";
-      b.items.forEach(function(it){ if(sel>it[3])return;
+      b.items.forEach(function(it){ if(!active(it,sel))return;
         var ch=!!d[it[0]];
-        rows+='<label class="item'+(ch?' done':'')+'"><input type="checkbox" data-id="'+it[0]+'"'+(ch?' checked':'')+'><div class="it"><b>'+it[1]+'</b>'+(it[2]?'<small>'+it[2]+'</small>':'')+'</div>'+(UL[it[3]]?'<span class="until">'+UL[it[3]]+'</span>':'')+'</label>';});
+        rows+='<label class="item'+(ch?' done':'')+'"><input type="checkbox" data-id="'+it[0]+'"'+(ch?' checked':'')+'><div class="it"><b>'+it[1]+'</b>'+(it[2]?'<small>'+it[2]+'</small>':'')+'</div>'+(it[5]?'<span class="until">'+it[5]+'</span>':'')+'</label>';});
       if(!rows) return;
       html+='<section class="block" style="--c:var('+b.c+')"><div class="bh"><h2>'+b.t+'</h2><span>'+b.s+'</span></div>'+rows+'</section>';
     });
     document.getElementById("blocks").innerHTML=html;
     Array.prototype.forEach.call(document.querySelectorAll("#blocks input"),function(inp){
-      inp.onchange=function(){ store[sel]=store[sel]||{}; store[sel][inp.dataset.id]=inp.checked; save();
+      inp.onchange=function(){ var k=key(sel); store[k]=store[k]||{}; store[k][inp.dataset.id]=inp.checked; save();
         inp.closest("label").classList.toggle("done",inp.checked); prog(); renderDays(); };
     });
     prog();
   }
   function prog(){var c=doneCount(sel);document.getElementById("pnum").textContent=c[0]+"/"+c[1];
     document.getElementById("bar").style.width=(c[1]?c[0]/c[1]*100:0)+"%";}
-  document.getElementById("reset").onclick=function(){store[sel]={};save();render();};
+  document.getElementById("reset").onclick=function(){store[key(sel)]={};save();render();};
   render();
 })();
 </script>
