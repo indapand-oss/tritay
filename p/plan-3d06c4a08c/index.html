@@ -105,6 +105,22 @@ label.item.done .it b{text-decoration:line-through;opacity:.55}
 .red p{margin:10px 0 0;font-size:14px}
 .foot{text-align:center;color:var(--muted);font-size:13px;margin:14px 6px}
 .reset{display:block;margin:6px auto 0;border:0;background:none;color:var(--muted);text-decoration:underline;font:inherit;font-size:13px}
+.doclink{display:inline-block;margin:12px 0 0 6px;background:var(--ink);color:var(--card);font-weight:700;padding:8px 14px;border-radius:20px;font-size:15px;text-decoration:none}
+.doc{background:var(--card);border-radius:20px;padding:16px 16px 10px;margin-bottom:12px;border:2px solid var(--mile)}
+.doc h2{margin:0 0 2px;font-size:19px;color:var(--mile)}
+.doc .lead{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
+.doc h3{margin:14px 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.doc .sum{margin:0 0 8px;font-size:15px}
+.doc .tw{overflow-x:auto;margin:0 -4px}
+.doc table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.doc th{font-size:12px;color:var(--muted);font-weight:600;text-align:left;padding:4px 4px;border-bottom:1px solid var(--line)}
+.doc td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc td.n{white-space:nowrap;font-weight:600}
+.doc td.c{color:var(--muted);font-size:13px}
+.doc tr.cl td{color:var(--muted)}
+.doc ol,.doc ul{margin:0;padding-left:20px}
+.doc li{margin:5px 0;font-size:15px}
+.doc .upd{font-size:12px;color:var(--muted);margin:12px 0 2px}
 button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
 </style>
 </head>
@@ -113,7 +129,7 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   <div class="wrap" style="padding:0">
     <h1>Мама · план приёма</h1>
     <div class="sub" id="term">ПДР 28.12.2026</div>
-    <div class="pill" id="visitPill" hidden></div>
+    <div class="pill" id="visitPill" hidden></div><a class="doclink" id="docLink" href="#doc" hidden>Сводка для врача ↓</a>
   </div>
 </header>
 <main class="wrap">
@@ -123,6 +139,47 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   <div class="progress"><div class="bar"><i id="bar"></i></div><div class="pnum" id="pnum">0/0</div></div>
   <div id="dayNote"></div>
   <div id="blocks"></div>
+
+  <section class="doc" id="doc" hidden>
+    <h2>Для врача · 19.10 · 30 недель</h2>
+    <p class="lead">Покажи этот блок на приёме. Давление — домашний тонометр A&amp;D UA-888, серии по 3 замера.</p>
+
+    <h3>Давление дома</h3>
+    <p class="sum" id="bpSum"></p>
+    <div class="tw"><table id="bpTab"></table></div>
+
+    <h3>Давление на приёмах</h3>
+    <div class="tw"><table id="bpClin"></table></div>
+
+    <h3>Вес</h3>
+    <p class="sum" id="wtSum"></p>
+    <div class="tw"><table id="wtTab"></table></div>
+
+    <h3>Самочувствие</h3>
+    <ul>
+      <li>С 10.10 — простуда: насморк, заложен нос, першило горло. Температуры не было.</li>
+      <li>07.10 — тяжёлая голова: 4 часа без еды. После обеда прошла, больше не повторялась. Мушек и отёков не было.</li>
+      <li>28.09 — белые точки на слизистой верхней губы, к 30.09 прошли.</li>
+    </ul>
+
+    <h3>Что принимаю</h3>
+    <ul>
+      <li>9:00 и 21:30 — Магне B6 форте по 1 таблетке</li>
+      <li>13:30 — Фемибион 2 (таблетка + капсула), витамин D3+K2 1 капля (≈1250 МЕ), йодомарин ½ таблетки</li>
+      <li>16:30 — железо ANAGRAN (бисглицинат, в составе ещё фолиевая кислота 600 мкг) — 2 спансулы</li>
+    </ul>
+
+    <h3>Вопросы</h3>
+    <ol>
+      <li>Направление на кровь: ферритин <b>вместе с СРБ</b> (была простуда), ТТГ и Т4 свободный, витамин D. И общий анализ мочи.</li>
+      <li>Фолатов в сутки выходит 1000 мкг: 400 из Фемибиона и 600 из железа. Оставить так или сменить железо на вариант без B9?</li>
+      <li>Йодомарин: в записях стоит 200 мкг (целая таблетка), а 11.09 сказали половину. Как правильно?</li>
+      <li>Вес — посмотрите ряд выше. Всё ли в порядке с темпом?</li>
+      <li>Что можно при простуде от насморка и горла.</li>
+      <li>Направления на 3-й скрининг УЗИ, к офтальмологу, терапевту и стоматологу.</li>
+    </ol>
+    <p class="upd" id="docUpd"></p>
+  </section>
 
   <section class="cal" id="cal">
     <h2>Календарь</h2>
@@ -288,6 +345,45 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   function prog(){var c=doneCount(sel);document.getElementById("pnum").textContent=c[0]+"/"+c[1];
     document.getElementById("bar").style.width=(c[1]?c[0]/c[1]*100:0)+"%";}
   document.getElementById("reset").onclick=function(){store[sel]={};save();render();};
+
+  // ===== сводка для врача =====
+  var DOC={until:"2026-10-19",upd:"13.10.2026",
+    bp:[ // дата, условия, [[сис,диа,пульс]...]
+      ["2026-10-07","днём, болела голова, 4 ч без еды",[[117,68,70],[109,71,71],[109,72,70]]],
+      ["2026-10-08","утро, натощак",[[98,53,68],[92,52,72],[96,53,73]]],
+      ["2026-10-09","после завтрака и чая",[[110,58,82],[96,57,83],[100,57,85]]],
+      ["2026-10-10","утро, натощак, начало простуды",[[102,60,73],[98,61,74],[99,61,72]]],
+      ["2026-10-11","утро, натощак (1 замер — сбой прибора, убран)",[[98,56,72],[95,56,73]]],
+      ["2026-10-12","утро, натощак, простуда, плохо спала",[[88,52,72],[86,53,75],[96,55,73]]],
+      ["2026-10-13","утро, натощак, простуда",[[102,59,74],[88,46,75],[106,53,76]]]
+    ],
+    clin:[["2026-06-04","10 нед","90/60"],["2026-06-23","13 нед","100/60"],["2026-07-23","17 нед","108/61"],["2026-08-13","20 нед","119/56"],["2026-09-11","24 нед","105/60"],["2026-09-30","27 нед","115/67, пульс 90"]],
+    wt:[["до беременности","",62.0,"cl"],["2026-09-11","на приёме, днём",67.8,"cl"],["2026-09-30","на приёме, днём, в одежде",70.0,"cl"],
+        ["2026-10-08","дома, утро, натощак",69.6,""],["2026-10-09","дома, утро, натощак",69.9,""],["2026-10-12","дома, утро, натощак",70.0,""],["2026-10-13","дома, утро, натощак",70.4,""]]
+  };
+  (function(){
+    var today=iso(T); if(today>DOC.until) return;
+    document.getElementById("doc").hidden=false; document.getElementById("docLink").hidden=false;
+    function avg(a,i){var s=0;a.forEach(function(x){s+=x[i];});return Math.round(s/a.length);}
+    var h='<tr><th>Дата</th><th>Срок</th><th>Замеры</th><th>Среднее</th></tr>', ms=[], md=[], maxS=0, maxD=0;
+    DOC.bp.forEach(function(r){r[2].forEach(function(x){if(x[0]>maxS)maxS=x[0];if(x[1]>maxD)maxD=x[1];});});
+    DOC.bp.forEach(function(r){var d=fromIso(r[0]),a=r[2];
+      var reads=a.map(function(x){return x[0]+"/"+x[1];}).join(", ");
+      var av=avg(a,0)+"/"+avg(a,1)+", п"+avg(a,2);
+      if(r[1].indexOf("натощак")>=0){a.forEach(function(x){ms.push(x[0]);md.push(x[1]);});}
+      h+='<tr><td class="n">'+ddmm(r[0])+'</td><td class="n">'+Math.floor(gest(d)/7)+' нед</td><td>'+reads+'<div class="c">'+r[1]+'</div></td><td class="n">'+av+'</td></tr>';});
+    document.getElementById("bpTab").innerHTML=h;
+    if(ms.length){document.getElementById("bpSum").innerHTML='Утром натощак: верхнее <b>'+Math.min.apply(null,ms)+'–'+Math.max.apply(null,ms)+'</b>, нижнее <b>'+Math.min.apply(null,md)+'–'+Math.max.apply(null,md)+'</b>. Максимум за все серии — '+maxS+'/'+maxD+'.';}
+    var c='<tr><th>Дата</th><th>Срок</th><th>Давление</th></tr>';
+    DOC.clin.forEach(function(r){c+='<tr><td class="n">'+ddmm(r[0])+'</td><td class="n">'+r[1]+'</td><td>'+r[2]+'</td></tr>';});
+    document.getElementById("bpClin").innerHTML=c;
+    var w='<tr><th>Дата</th><th>Условия</th><th>Вес, кг</th></tr>',home=DOC.wt.filter(function(r){return !r[3];});
+    DOC.wt.forEach(function(r){w+='<tr class="'+r[3]+'"><td class="n">'+(r[0].length===10?ddmm(r[0]):r[0])+'</td><td class="c">'+r[1]+'</td><td class="n">'+r[2].toFixed(1).replace(".",",")+'</td></tr>';});
+    document.getElementById("wtTab").innerHTML=w;
+    if(home.length>1){var f=home[0],l=home[home.length-1],dd=Math.round((fromIso(l[0])-fromIso(f[0]))/864e5),dw=l[2]-f[2];
+      document.getElementById("wtSum").innerHTML='Всего <b>+'+(l[2]-62).toFixed(1).replace(".",",")+' кг</b> от 62. Дома утром за '+dd+' дн: '+(dw>=0?'+':'')+dw.toFixed(1).replace(".",",")+' кг (на фоне простуды).';}
+    document.getElementById("docUpd").textContent="Данные на "+DOC.upd+". Новые замеры до приёма будут добавлены.";
+  })();
   render();setInterval(renderNext,60000);
 })();
 </script>
