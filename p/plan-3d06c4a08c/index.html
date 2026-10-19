@@ -198,7 +198,8 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
     <p><b>Пропустила приём</b> — двойную дозу не пей, продолжай со следующего. Железо можно выпить позже, если до вечернего магния в 21:30 остаётся 2 часа, то есть до 19:30.</p>
     <p><b>Если от железа тошнит</b> — дели дозу: 1 спансула в 10:30 и 1 в 16:30. Магний тогда переносится на 19:00 и 22:00.</p>
     <p><b>Новая добавка</b> — сначала фото состава в группу, потом первая таблетка.</p>
-    <p class="off">Спирулину не принимаем — врач запретил 11.09.</p>
+    <p><b>Изжога</b> — Ренни по необходимости, только не с 14:30 до 18:30: он мешает усвоиться железу. Лучше после ужина или перед сном. Ужин за 3 часа до сна, без газировки.</p>
+    <p class="off">Фемибион — пауза с 19.10 на месяц, по решению врача. Спирулину не принимаем.</p>
   </section>
 
   <section class="red">
@@ -218,7 +219,7 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   </section>
 
   <p class="foot">Открывай страницу всегда со значка на экране «Домой» — отметки хранятся в этом телефоне.<br><br>
-  Схема подтверждена врачом 30.09. Если на следующем приёме что-то изменится — страница обновится по этой же ссылке. Дозы меняет только гинеколог.
+  Схема по приёму 19.10. Если на следующем приёме что-то изменится — страница обновится по этой же ссылке. Дозы меняет только гинеколог.
   <button class="reset" id="reset" type="button">Сбросить отметки за выбранный день</button></p>
 </main>
 
@@ -228,7 +229,11 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   var EV={
     "2026-09-30":{k:"visit",t:"Приём у врача",n:"Всё по сроку. Железо — без изменений. Витамин D — теперь 1 капля."},
     "2026-10-05":{k:"mile",t:"28 недель",n:"С сегодняшнего дня каждый вечер отмечай, как малыш шевелился."},
-    "2026-10-19":{k:"visit",t:"Приём у врача · 30 недель",n:"Попроси вписать в направление на кровь ферритин, СРБ, ТТГ с Т4 свободным и витамин D. Спроси: фолатов выходит 1000 мкг в сутки из двух препаратов — оставить так? Йодомарин — ½ или целая таблетка? С этой недели до 16.11 — 3-й скрининг УЗИ, офтальмолог, терапевт, стоматолог: запишись."}
+    "2026-10-19":{k:"visit",t:"Приём у врача · 30 недель",n:"Всё по сроку, малыш головкой вниз. Фемибион — пауза на месяц, витамин D — на утро, йодомарин — целая таблетка, от изжоги Ренни при необходимости. Декрет с сегодняшнего дня."},
+    "2026-10-28":{k:"mile",t:"Сдать кровь · 9:54",n:"Дубравная 41, кабинет 619. Натощак, вода можно. Платно в тот же заход: ферритин вместе с СРБ, ТТГ и Т4 свободный, витамин D 25(OH)D. Железо накануне пей как обычно. Магне и витамин D — после, с завтраком. Возьми перекус."},
+    "2026-11-02":{k:"mile",t:"32 недели",n:"С этой недели КТГ раз в 2 недели. Запишись к терапевту, офтальмологу, стоматологу и на ЭКГ, если ещё нет."},
+    "2026-11-03":{k:"visit",t:"Приём у врача",n:"Спроси: возвращать ли Фемибион через месяц или достаточно железа; результаты крови от 28.10; КТГ."},
+    "2026-11-23":{k:"mile",t:"3-й скрининг УЗИ · 9:40",n:"Другой филиал: Сосновая 11, строение 2, кабинет 227."}
   };
   var WD=["вс","пн","вт","ср","чт","пт","сб"], WDM=["пн","вт","ср","чт","пт","сб","вс"];
   var MN=["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
@@ -237,11 +242,12 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   // [id, название, пояснение, с какой даты (включительно) или ""]
   var B=[
     {t:"Утро",time:"9:00",s:"завтрак в 8:10, сразу как встала",c:"--morning",items:[
-      ["mg1","Магне B6 форте — 1 таблетка","после завтрака",""]]},
+      ["mg1","Магне B6 форте — 1 таблетка","после завтрака",""],
+      ["d3m","Витамин D3 + K2 — 1 капля","после завтрака, где были яйца, сыр или творог · с 20.10 утром","2026-10-20"]]},
     {t:"Обед",time:"13:30",s:"во время еды",c:"--lunch",items:[
-      ["femi","Фемибион 2 — таблетка + капсула","капсулу — только с едой",""],
-      ["d3","Витамин D3 + K2 — 1 капля","с едой, где есть жир · с 30.09 вместо 2 капель",""],
-      ["iod","Йодомарин — ½ таблетки","",""]]},
+      ["femi","Фемибион 2 — таблетка + капсула","капсулу — только с едой","","2026-10-18"],
+      ["d3","Витамин D3 + K2 — 1 капля","с едой, где есть жир","","2026-10-19"],
+      ["iod","Йодомарин — 1 таблетка (200 мкг)","с 19.10 целая таблетка, до этого была ½",""]]},
     {t:"Железо",time:"16:30",s:"через 3 часа после обеда",c:"--iron",items:[
       ["fe","Железо ANAGRAN — 2 спансулы","стакан воды, можно с лимоном",""]],
       win:"<b>С 14:30 до 18:30</b> без чая, кофе и молочного. Перекус в это время — фрукт с орехами или яйцо."},
@@ -266,7 +272,8 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
   END=new Date(T.getFullYear(),T.getMonth()+2,0);
   function eachDay(fn){for(var d=new Date(START);d<=END;d.setDate(d.getDate()+1))fn(new Date(d));}
 
-  function itemsFor(k){var r=[];B.forEach(function(b){b.items.forEach(function(it){if(!it[3]||k>=it[3])r.push(it);});});return r;}
+  function act(it,k){return (!it[3]||k>=it[3])&&(!it[4]||k<=it[4]);}
+  function itemsFor(k){var r=[];B.forEach(function(b){b.items.forEach(function(it){if(act(it,k))r.push(it);});});return r;}
   function doneCount(k){var d=store[k]||{},ids=itemsFor(k),c=0;ids.forEach(function(it){if(d[it[0]])c++;});return [c,ids.length];}
   function state(k){var c=doneCount(k);return c[1]&&c[0]===c[1]?"done":(c[0]?"part":"");}
 
@@ -281,11 +288,11 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
 
   function renderNext(){
     var el=document.getElementById("next"),n=new Date(),m=n.getHours()*60+n.getMinutes(),k=iso(today()),d=store[k]||{},nx=null;
-    function pend(b){return b.items.some(function(it){return (!it[3]||k>=it[3])&&!d[it[0]];});}
+    function pend(b){return b.items.some(function(it){return act(it,k)&&!d[it[0]];});}
     for(var i=0;i<B.length;i++){if(pend(B[i])&&mins(B[i].time)+60>=m){nx=B[i];break;}}
     if(!nx){var miss=B.filter(pend);if(miss.length)nx=miss[miss.length-1];}
     if(!nx){el.style.setProperty("--c","var(--ok)");el.innerHTML='<div class="t">✓</div><div><b>На сегодня всё отмечено</b><small>Завтра первый приём в 9:00</small></div>';return;}
-    var names=nx.items.filter(function(it){return (!it[3]||k>=it[3])&&!d[it[0]];}).map(function(it){return it[1].split(" — ")[0];}).join(", ");
+    var names=nx.items.filter(function(it){return act(it,k)&&!d[it[0]];}).map(function(it){return it[1].split(" — ")[0];}).join(", ");
     var diff=mins(nx.time)-m, when=diff>0?("через "+(diff>=60?Math.floor(diff/60)+" ч ":"")+(diff%60)+" мин"):(diff>-60?"сейчас":"пропущено — смотри «Правила»");
     el.style.setProperty("--c","var("+nx.c+")");
     el.innerHTML='<div class="t">'+nx.time+'</div><div><b>'+names+'</b><small>'+nx.t+' · '+when+'</small></div>';
@@ -335,7 +342,7 @@ button:focus-visible{outline:2px solid var(--iron);outline-offset:2px}
     document.getElementById("dayNote").innerHTML=e?'<div class="note '+e.k+'"><b>'+e.t+'</b>'+e.n+'</div>':"";
     B.forEach(function(b){
       var rows="";
-      b.items.forEach(function(it){if(it[3]&&sel<it[3])return;var ch=!!d[it[0]];
+      b.items.forEach(function(it){if(!act(it,sel))return;var ch=!!d[it[0]];
         rows+='<label class="item'+(ch?' done':'')+'"><input type="checkbox" id="cb-'+it[0]+'" data-id="'+it[0]+'"'+(ch?' checked':'')+'><div class="it"><b>'+it[1]+'</b>'+(it[2]?'<small>'+it[2]+'</small>':'')+'</div>'+(it[3]&&sel===it[3]?'<span class="new">новое</span>':'')+'</label>';});
       html+='<section class="block" style="--c:var('+b.c+')"><div class="bh"><h2>'+b.time+' · '+b.t+'</h2><span>'+b.s+'</span></div>'+rows+(b.win?'<div class="win">'+b.win+'</div>':'')+'</section>';
     });
